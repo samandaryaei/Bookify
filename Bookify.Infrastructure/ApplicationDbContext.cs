@@ -14,13 +14,13 @@ public sealed class ApplicationDbContext(DbContextOptions options, IPublisher pu
 
         base.OnModelCreating(modelBuilder);
     }
-
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
         try
         {
-            await PublishDomainEventAsync();
             var result = await base.SaveChangesAsync(cancellationToken);
+            await PublishDomainEventsAsync();
+
             return result;
         }
         catch (DbUpdateConcurrencyException ex)
@@ -28,16 +28,17 @@ public sealed class ApplicationDbContext(DbContextOptions options, IPublisher pu
             throw new ConcurrencyException("Concurrency exception occurred.", ex);
         }
     }
-
-    private async Task PublishDomainEventAsync()
+    private async Task PublishDomainEventsAsync()
     {
         var domainEvents = ChangeTracker
             .Entries<Entity>()
             .Select(entry => entry.Entity)
-            .SelectMany(entry =>
+            .SelectMany(entity =>
             {
-                var domainEvents = entry.GetDomainEvents();
-                entry.ClearDomainEvents();
+                var domainEvents = entity.GetDomainEvents();
+
+                entity.ClearDomainEvents();
+
                 return domainEvents;
             })
             .ToList();

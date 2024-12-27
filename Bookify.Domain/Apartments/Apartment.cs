@@ -7,6 +7,9 @@ public class Apartment : Entity
 {
     public Guid Id { get; }
 
+    private Apartment()
+    {
+    }
     public Apartment(
         Guid id,
         Name name,
