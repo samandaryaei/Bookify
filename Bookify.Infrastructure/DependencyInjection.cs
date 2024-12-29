@@ -1,4 +1,5 @@
-﻿using Bookify.Application.Abstractions.Authentication;
+﻿using Bookify.Application.Abstractions;
+using Bookify.Application.Abstractions.Authentication;
 using Bookify.Application.Abstractions.Clock;
 using Bookify.Application.Abstractions.Data;
 using Bookify.Application.Abstractions.Email;
@@ -29,21 +30,30 @@ public static class DependencyInjection
 
         AddPersistence(services, configuration);
 
+        AddAuthentication(services, configuration);
+
+        return services;
+    }
+
+    private static void AddAuthentication(IServiceCollection services, IConfiguration configuration)
+    {
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer();
         services.Configure<AuthenticationOptions>(configuration.GetSection("Authentication"));
         services.ConfigureOptions<JwtBearerOptionsSetup>();
         services.Configure<KeyCloakOptions>(configuration.GetSection("KeyCloak"));
         services.AddTransient<AdminAuthorizationDelegatingHandler>();
         services.AddHttpClient<IAuthenticationService, AuthenticationService>((serviceProvider, httpClient) =>
+            {
+                var keyCloakOptions = serviceProvider.GetRequiredService<IOptions<KeyCloakOptions>>().Value;
+                httpClient.BaseAddress = new Uri(keyCloakOptions.AdminUrl);
+            })
+            .AddHttpMessageHandler<AdminAuthorizationDelegatingHandler>();
+        services.AddHttpClient<IJwtService, JwtService>((serviceProvider,httpClient) => 
         {
-            var keyCloakOptions = serviceProvider.GetRequiredService<IOptions<KeyCloakOptions>>().Value;
-            httpClient.BaseAddress = new Uri(keyCloakOptions.AdminUrl);
-        })
-        .AddHttpMessageHandler<AdminAuthorizationDelegatingHandler>();
-
-        return services;
+            var keycloakOptions = serviceProvider.GetRequiredService<IOptions<KeyCloakOptions>>().Value;
+            httpClient.BaseAddress = new Uri(keycloakOptions.TokenUrl);
+        });
     }
-
     private static void AddPersistence(IServiceCollection services, IConfiguration configuration)
     {
         var connectionString = configuration.GetConnectionString("DataBase") ??
