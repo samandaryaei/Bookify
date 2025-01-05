@@ -7,7 +7,6 @@ internal sealed class JwtBearerOptionsSetup(IOptions<AuthenticationOptions> auth
     : IConfigureNamedOptions<JwtBearerOptions>
 {
     private readonly AuthenticationOptions _authenticationOptions = authenticationOptions.Value;
-    
     public void Configure(JwtBearerOptions options)
     {
         options.Audience = _authenticationOptions.Audience;

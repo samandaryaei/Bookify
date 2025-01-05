@@ -25,19 +25,12 @@ public sealed class Review : Entity
     }
     private Review()
     {}
-
     public Guid ApartmentId { get; private set; }
-
     public Guid BookingId { get; private set; }
-
     public Guid UserId { get; private set; }
-
     public Rating Rating { get; private set; }
-
     public Comment Comment { get; private set; }
-
     public DateTime CreatedOnUtc { get; private set; }
-
     public static Result<Review> Create(
         Booking booking,
         Rating rating,
@@ -45,9 +38,7 @@ public sealed class Review : Entity
         DateTime createdOnUtc)
     {
         if (booking.Status != BookingStatus.Completed)
-        {
             return Result.Failure<Review>(ReviewErrors.NotEligible);
-        }
 
         var review = new Review(
             Guid.NewGuid(),

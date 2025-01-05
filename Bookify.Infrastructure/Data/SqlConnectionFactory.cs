@@ -7,11 +7,9 @@ namespace Bookify.Infrastructure.Data;
 public sealed class SqlConnectionFactory(string connectionString) 
     : ISqlConnectionFactory
 {
-    private readonly string _connectionString = connectionString;
-
     public IDbConnection CreateConnection()
     {
-        var connection = new NpgsqlConnection(_connectionString);
+        var connection = new NpgsqlConnection(connectionString);
         connection.Open();
         
         return connection;

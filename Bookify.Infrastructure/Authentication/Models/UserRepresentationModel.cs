@@ -50,7 +50,6 @@ public class UserRepresentationModel
     public bool Enabled { get; set; }  
     //public bool? EmailVerified { get; set; }  // optional  
     public List<CredentialRepresentationModel>? Credentials { get; set; }  
-    
     public static UserRepresentationModel FromUser(User user)  
     {  
         return new UserRepresentationModel  

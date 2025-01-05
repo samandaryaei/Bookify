@@ -11,14 +11,13 @@ internal sealed class SearchApartmentQueryHandler(ISqlConnectionFactory sqlConne
     : IQueryHandler<SearchApartmentQuery, IReadOnlyList<ApartmentResponse>>
 {
     private static readonly int[] ActiveBookingStatuses =
-    {
+    [
         (int)BookingStatus.Reserved,
         (int)BookingStatus.Confirmed,
         (int)BookingStatus.Completed
-    };
-
-    public async Task<Result<IReadOnlyList<ApartmentResponse>>> Handle(SearchApartmentQuery request,
-        CancellationToken cancellationToken)
+    ];
+    public async Task<Result<IReadOnlyList<ApartmentResponse>>> Handle
+        (SearchApartmentQuery request, CancellationToken cancellationToken)
     {
         if (request.StartDate > request.EndDate)
             return new List<ApartmentResponse>();

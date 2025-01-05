@@ -1,11 +1,13 @@
-﻿using Bookify.Application.Abstractions.Data;
+﻿using Bookify.Application.Abstractions.Authentication;
+using Bookify.Application.Abstractions.Data;
 using Bookify.Application.Abstractions.Messaging;
 using Bookify.Domain.Abstractions;
+using Bookify.Domain.Bookings;
 using Dapper;
 
 namespace Bookify.Application.Bookings.GetBooking;
 
-internal sealed class GetBookingQueryHandler(ISqlConnectionFactory sqlConnectionFactory)
+internal sealed class GetBookingQueryHandler(ISqlConnectionFactory sqlConnectionFactory, IUserContext userContext)
     : IQueryHandler<GetBookingQuery, BookingResponse>
 {
     public async Task<Result<BookingResponse>> Handle(GetBookingQuery request, CancellationToken cancellationToken)
@@ -22,8 +24,8 @@ internal sealed class GetBookingQueryHandler(ISqlConnectionFactory sqlConnection
                                 price_for_period_currency AS PriceCurrency,
                                 cleaning_fee_amount AS CleaningFeeAmount,
                                 cleaning_fee_currency AS CleaningFeeCurrency,
-                                amenities_up_charge_amount AS AmenitiesUpChargeAmount,
-                                amenities_up_charge_currency AS AmenitiesUpChargeCurrency,
+                                amentities_up_charge_amount AS AmenitiesUpChargeAmount,
+                                amentities_up_charge_currency AS AmenitiesUpChargeCurrency,
                                 total_price_amount AS TotalPriceAmount,
                                 total_price_currency AS TotalPriceCurrency,
                                 duration_start AS DurationStart,
@@ -34,6 +36,9 @@ internal sealed class GetBookingQueryHandler(ISqlConnectionFactory sqlConnection
                             """;
 
         var booking = await connection.QueryFirstOrDefaultAsync<BookingResponse>(sql, new { request.BookingId });
+        
+        if (booking is null || booking.UserId != userContext.UserId)
+            return Result.Failure<BookingResponse>(BookingErrors.NotFound);
 
         return booking;
     }

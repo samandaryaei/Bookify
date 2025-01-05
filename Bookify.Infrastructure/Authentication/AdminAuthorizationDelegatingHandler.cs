@@ -9,14 +9,11 @@ namespace Bookify.Infrastructure.Authentication;
 public class AdminAuthorizationDelegatingHandler(IOptions<KeyCloakOptions> keyCloakOptions) : DelegatingHandler
 {
     private readonly KeyCloakOptions _keyCloakOptions = keyCloakOptions.Value;
-
-    protected override async Task<HttpResponseMessage>
-        SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+    protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
     {
         var authorizationToken = await GetAuthorizationToken(cancellationToken);
 
-        request.Headers.Authorization =
-            new AuthenticationHeaderValue(JwtBearerDefaults.AuthenticationScheme, authorizationToken.AccessToken);
+        request.Headers.Authorization = new AuthenticationHeaderValue(JwtBearerDefaults.AuthenticationScheme, authorizationToken.AccessToken);
         var httpResponseMessage = await base.SendAsync(request, cancellationToken);
 
         httpResponseMessage.EnsureSuccessStatusCode();

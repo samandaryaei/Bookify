@@ -36,9 +36,7 @@ public sealed class ApplicationDbContext(DbContextOptions options, IPublisher pu
             .SelectMany(entity =>
             {
                 var domainEvents = entity.GetDomainEvents();
-
                 entity.ClearDomainEvents();
-
                 return domainEvents;
             })
             .ToList();
