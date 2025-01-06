@@ -1,4 +1,5 @@
-﻿using Bookify.Application.Abstractions;
+﻿using Asp.Versioning;
+using Bookify.Application.Abstractions;
 using Bookify.Application.Abstractions.Authentication;
 using Bookify.Application.Abstractions.Caching;
 using Bookify.Application.Abstractions.Clock;
@@ -7,6 +8,7 @@ using Bookify.Application.Abstractions.Email;
 using Bookify.Domain.Abstractions;
 using Bookify.Domain.Apartments;
 using Bookify.Domain.Bookings;
+using Bookify.Domain.Reviews;
 using Bookify.Domain.Users;
 using Bookify.Infrastructure.Authentication;
 using Bookify.Infrastructure.Authorization;
@@ -41,11 +43,16 @@ public static class DependencyInjection
         AddAuthentication(services, configuration);
 
         AddAuthorization(services);
-        
+
         AddCaching(services, configuration);
+
+        AddHealthChecks(services, configuration);
+        
+        AddApiVersioning(services);
 
         return services;
     }
+
     private static void AddPersistence(IServiceCollection services, IConfiguration configuration)
     {
         var connectionString = configuration.GetConnectionString("DataBase") ??
@@ -59,13 +66,15 @@ public static class DependencyInjection
         services.AddScoped<IApartmentRepository, ApartmentRepository>();
         services.AddScoped<IBookingRepository, BookingRepository>();
         services.AddScoped<IUserRepository, UserRepository>();
-        
+        services.AddScoped<IReviewRepository, ReviewRepository>();
+
         services.AddSingleton<ISqlConnectionFactory>(_ => new SqlConnectionFactory(connectionString));
 
         services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<ApplicationDbContext>());
-        
+
         SqlMapper.AddTypeHandler(new DateOnlyTypeHandler());
     }
+
     private static void AddAuthentication(IServiceCollection services, IConfiguration configuration)
     {
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer();
@@ -79,7 +88,7 @@ public static class DependencyInjection
                 httpClient.BaseAddress = new Uri(keyCloakOptions.AdminUrl);
             })
             .AddHttpMessageHandler<AdminAuthorizationDelegatingHandler>();
-        services.AddHttpClient<IJwtService, JwtService>((serviceProvider,httpClient) => 
+        services.AddHttpClient<IJwtService, JwtService>((serviceProvider, httpClient) =>
         {
             var keycloakOptions = serviceProvider.GetRequiredService<IOptions<KeyCloakOptions>>().Value;
             httpClient.BaseAddress = new Uri(keycloakOptions.TokenUrl);
@@ -87,6 +96,7 @@ public static class DependencyInjection
         services.AddHttpContextAccessor();
         services.AddScoped<IUserContext, UserContext>();
     }
+
     private static void AddAuthorization(IServiceCollection services)
     {
         services.AddScoped<AuthorizationService>();
@@ -94,11 +104,36 @@ public static class DependencyInjection
         services.AddTransient<IAuthorizationHandler, PermissionAuthorizationHandler>();
         services.AddTransient<IAuthorizationPolicyProvider, PermissionAuthorizationPolicyProvider>();
     }
+
     private static void AddCaching(IServiceCollection services, IConfiguration configuration)
     {
         var connectionString = configuration.GetConnectionString("Cache") ??
                                throw new ArgumentNullException(nameof(configuration));
         services.AddStackExchangeRedisCache(options => options.Configuration = connectionString);
         services.AddSingleton<ICacheService, CacheService>();
+    }
+
+    private static void AddHealthChecks(IServiceCollection services, IConfiguration configuration)
+    {
+        services.AddHealthChecks()
+            .AddNpgSql(configuration.GetConnectionString("Database")!)
+            .AddRedis(configuration.GetConnectionString("Cache")!)
+            .AddUrlGroup(new Uri(configuration["Keycloak:BaseUrl"]!), HttpMethod.Get, "keycloak");
+    }
+
+    private static void AddApiVersioning(IServiceCollection services)
+    {
+        services.AddApiVersioning(options =>
+        {
+            options.DefaultApiVersion = new ApiVersion(1);
+            options.ReportApiVersions = true;
+            options.ApiVersionReader = new UrlSegmentApiVersionReader();
+        })
+        .AddMvc()
+        .AddApiExplorer(options =>
+        {
+            options.GroupNameFormat = "'v'V";
+            options.SubstituteApiVersionInUrl = true;
+        });
     }
 }
