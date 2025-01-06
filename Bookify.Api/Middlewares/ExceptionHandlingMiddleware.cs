@@ -33,7 +33,6 @@ public class ExceptionHandlingMiddleware(RequestDelegate next, ILogger<Exception
             await context.Response.WriteAsJsonAsync(problemDetails);
         }
     }
-
     private static ExceptionDetails GetExceptionDetails(Exception exception)
     {
         return exception switch
