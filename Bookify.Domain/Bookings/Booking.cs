@@ -7,8 +7,6 @@ namespace Bookify.Domain.Bookings;
 
 public sealed class Booking : Entity
 {
-    public Guid Id { get; }
-
     public Booking(
         Guid id,
         Guid apartmentId,

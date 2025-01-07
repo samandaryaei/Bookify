@@ -23,9 +23,9 @@ namespace Bookify.Infrastructure
             optionsBuilder.UseNpgsql(connectionString).UseSnakeCaseNamingConvention();
 
             // Provide a mock or dummy IPublisher instance
-            var mockPublisher = new MockPublisher();
+            //var mockPublisher = new MockPublisher();
 
-            return new ApplicationDbContext(optionsBuilder.Options, mockPublisher);
+            return new ApplicationDbContext(optionsBuilder.Options, null);
         }
     }
 

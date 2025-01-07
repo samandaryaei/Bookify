@@ -34,8 +34,10 @@ internal sealed class ReserveBookingCommandHandler(
         try
         {
             var booking = Booking.Reserve(apartment, user.Id, duration, utcNow: dateTimeProvider.UtcNow, pricingService);
+            
             bookingRepository.Add(booking);
             await unitOfWork.SaveChangesAsync(cancellationToken);
+            
             return booking.Id;
         }
         catch (ConcurrencyException)
