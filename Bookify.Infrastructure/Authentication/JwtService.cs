@@ -37,7 +37,7 @@ public sealed class JwtService(HttpClient httpClient, IOptions<KeyCloakOptions> 
 
             return authorizationToken.AccessToken;
         }
-        catch (HttpRequestException ex)
+        catch (HttpRequestException)
         {
             return Result.Failure<string>(AuthenticationFailed);
         }

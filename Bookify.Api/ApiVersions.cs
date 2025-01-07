@@ -1,4 +1,4 @@
-namespace Bookify.Api.Controllers;
+namespace Bookify.Api;
 
 public static class ApiVersions
 {

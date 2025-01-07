@@ -22,7 +22,7 @@ public class PricingService
             };
         }
 
-        var amenitiesUpCharge = Money.Zero();
+        var amenitiesUpCharge = Money.Zero(Currency.FromCode("USD"));
         if (percentageUpCharge > 0)
             amenitiesUpCharge = new Money(priceForPeriod.Amount * percentageUpCharge, currency);
 

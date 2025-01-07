@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 
 namespace Bookify.Infrastructure;
 
-public sealed class ApplicationDbContext(DbContextOptions options, IDateTimeProvider dateTimeProvider)
+public sealed class ApplicationDbContext(DbContextOptions options, IDateTimeProvider? dateTimeProvider)
     : DbContext(options), IUnitOfWork
 {
     private static readonly JsonSerializerSettings JsonSerializerSettings = new()
@@ -51,7 +51,7 @@ public sealed class ApplicationDbContext(DbContextOptions options, IDateTimeProv
             })
             .Select(domainEvent => new OutboxMessage(
                 Guid.NewGuid(),
-                dateTimeProvider.UtcNow,
+                dateTimeProvider!.UtcNow,
                 domainEvent.GetType().Name,
                 JsonConvert.SerializeObject(domainEvent, JsonSerializerSettings)))
             .ToList();

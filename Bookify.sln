@@ -18,6 +18,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		docker-compose.override.yml = docker-compose.override.yml
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bookify.Domain.UnitTests", "test\Bookify.Domain.UnitTests\Bookify.Domain.UnitTests.csproj", "{74A90433-3508-4DF0-865E-55F597E287AC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bookify.Application.UnitTests", "test\Bookify.Application.UnitTests\Bookify.Application.UnitTests.csproj", "{39D908C5-624C-4EBD-BC8E-7B2F90376812}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,6 +32,8 @@ Global
 		{4FDD08DD-97F7-4B95-9BA4-7B5BEE067D9C} = {0804BE94-8289-489D-AFF7-175586F16348}
 		{6727C0B4-F01E-4FC6-9D08-F2FD6A41B506} = {0804BE94-8289-489D-AFF7-175586F16348}
 		{30E5B253-6C39-4F9D-A8C7-2DDEE263E931} = {0804BE94-8289-489D-AFF7-175586F16348}
+		{74A90433-3508-4DF0-865E-55F597E287AC} = {BE25612C-7AB5-4315-B229-AE9B81466A99}
+		{39D908C5-624C-4EBD-BC8E-7B2F90376812} = {BE25612C-7AB5-4315-B229-AE9B81466A99}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{D2C44B6B-9FD3-4190-8527-26F3679EB7D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -46,5 +52,13 @@ Global
 		{30E5B253-6C39-4F9D-A8C7-2DDEE263E931}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{30E5B253-6C39-4F9D-A8C7-2DDEE263E931}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{30E5B253-6C39-4F9D-A8C7-2DDEE263E931}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74A90433-3508-4DF0-865E-55F597E287AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74A90433-3508-4DF0-865E-55F597E287AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74A90433-3508-4DF0-865E-55F597E287AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74A90433-3508-4DF0-865E-55F597E287AC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39D908C5-624C-4EBD-BC8E-7B2F90376812}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39D908C5-624C-4EBD-BC8E-7B2F90376812}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39D908C5-624C-4EBD-BC8E-7B2F90376812}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39D908C5-624C-4EBD-BC8E-7B2F90376812}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
