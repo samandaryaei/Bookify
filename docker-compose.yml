@@ -30,8 +30,8 @@ services:
       - KEYCLOAK_ADMIN=admin
       - KEYCLOAK_ADMIN_PASSWORD=admin
     volumes:
-      - ./.containers/identity:/opt/keycloak/data
-      - ./.files/bookify-realm-export.json:/opt/keycloak/data/import/realm.json
+      - .containers/identity:/opt/keycloak/data
+      - .files/bookify-realm-export.json:/opt/keycloak/data/import/realm.json
     ports:
       - "18080:8080"
   

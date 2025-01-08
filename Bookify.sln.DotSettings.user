@@ -45,9 +45,17 @@
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=7020124F_002D9FFC_002D4AC3_002D8F3D_002DAAB8E0240759_002Ff_003ASwaggerUIMiddleware_002Ecs_002Fl_003A_002E_002E_003F_002E_002E_003FAppData_003FRoaming_003FJetBrains_003FRider2024_002E2_003Fresharper_002Dhost_003FSourcesCache_003F2813f16dfae791865ab77daff01fdc41fe1d1ff9b5ba56dc6579d5175f1c_003FSwaggerUIMiddleware_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=7020124F_002D9FFC_002D4AC3_002D8F3D_002DAAB8E0240759_002Ff_003ATask_00601_002Ecs_002Fl_003A_002E_002E_003F_002E_002E_003FAppData_003FRoaming_003FJetBrains_003FRider2024_002E2_003Fresharper_002Dhost_003FDecompilerCache_003Fdecompiler_003F24372012c6c94138bf3f496e104366ffc8f918_003F19_003F45cabac7_003FTask_00601_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=7020124F_002D9FFC_002D4AC3_002D8F3D_002DAAB8E0240759_002Ff_003AVoid_002Ecs_002Fl_003A_002E_002E_003F_002E_002E_003FAppData_003FRoaming_003FJetBrains_003FRider2024_002E2_003Fresharper_002Dhost_003FDecompilerCache_003Fdecompiler_003F243a037ca7a04510a506adfdd94befbac90930_003Fa1_003F46b6da2f_003FVoid_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
-	<s:String x:Key="/Default/Environment/Highlighting/HighlightingSourceSnapshotLocation/@EntryValue">C:\Users\Saman\AppData\Local\Temp\JetBrains\Rider\vAny\CoverageData\_Bookify.2136808499\Snapshot\snapshot.utdcvr</s:String>
 	
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=7719e5b8_002Da1f7_002D4e58_002Dab9d_002D5c8d88e86ceb/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Create_Should_SetPropertyValues" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=3be62889_002Dae5b_002D4f79_002Dacf6_002D2497a6bcd9c5/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="GetBooking_ShouldReturnFailure_WhenBookingIsNotFound" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;xUnit::BBEDA41D-B4D1-44EC-829E-A23E7F9681D5::net8.0::Bookify.Application.IntegrationTests.Bookings.GetBookingTests.GetBooking_ShouldReturnFailure_WhenBookingIsNotFound&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::BBEDA41D-B4D1-44EC-829E-A23E7F9681D5::net8.0::Bookify.Application.IntegrationTests.Apartments.SearchApartmentsTests.SearchApartments_ShouldReturnEmptyList_WhenDateRangeIsInvalid&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::BBEDA41D-B4D1-44EC-829E-A23E7F9681D5::net8.0::Bookify.Application.IntegrationTests.Apartments.SearchApartmentsTests.SearchApartments_ShouldReturnApartments_WhenDateRangeIsvalid&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::BBEDA41D-B4D1-44EC-829E-A23E7F9681D5::net8.0::Bookify.Application.IntegrationTests.Bookings.ConfirmBookingTests.ConfirmBooking_ShouldReturnFailure_WhenBookingIsNotFound&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=7719e5b8_002Da1f7_002D4e58_002Dab9d_002D5c8d88e86ceb/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Create_Should_SetPropertyValues" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;Solution /&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	

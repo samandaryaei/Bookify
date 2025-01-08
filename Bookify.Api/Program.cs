@@ -1,18 +1,13 @@
 using Asp.Versioning;
 using Asp.Versioning.Builder;
 using Bookify.Api;
-using Bookify.Api.Controllers;
 using Bookify.Api.Controllers.Bookings;
 using Bookify.Api.Extensions;
-using Bookify.Api.Middlewares;
 using Bookify.Api.OpenApi;
 using Bookify.Application;
-using Bookify.Application.Abstractions.Data;
 using Bookify.Infrastructure;
-using Dapper;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
-using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -46,8 +41,10 @@ if (app.Environment.IsDevelopment())
         }
     });
 
-     // app.ApplyMigrations();
-     // app.SeedData();
+     app.ApplyMigrations();
+     
+     // REMARK: Uncomment if you want to seed initial data
+     app.SeedData();
 }
 
 //app.UseHttpsRedirection();
@@ -77,6 +74,8 @@ app.MapHealthChecks("health",new HealthCheckOptions
 });
 
 app.Run();
+
+public partial class Program;
 
 // public class CustomeHealthCheck(ISqlConnectionFactory sqlConnectionFactory) : IHealthCheck
 // {
