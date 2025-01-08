@@ -2,4 +2,4 @@
 
 namespace Bookify.Domain.Reviews.Events;
 
-public sealed record ReviewCreatedDomainEvent(Guid ReviewId) : IDomainEvents;
+public sealed record ReviewCreatedDomainEvent(Guid ReviewId) : IDomainEvent;

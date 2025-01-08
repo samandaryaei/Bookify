@@ -33,9 +33,5 @@
     <ItemGroup>
       <Folder Include="Migrations\" />
     </ItemGroup>
-    
-    <ItemGroup>
-        <InternalVisibleTo Include="Bookify.Application.IntegrationTests" />
-    </ItemGroup>
 
 </Project>

@@ -5,7 +5,7 @@ namespace Bookify.Domain.UnitTests.Infrastructure;
 public abstract class BaseTest
 {
     public static T AssertDomainEventWasPublished<T>(Entity entity)
-        where T : IDomainEvents
+        where T : IDomainEvent
     {
         var domainEvents = entity.GetDomainEvents().OfType<T>().SingleOrDefault();
         if (domainEvents is null)

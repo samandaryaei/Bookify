@@ -43,7 +43,7 @@ internal sealed class ProcessOutboxMessagesJob(
             try
             {
                 var domainEvent
-                    = JsonConvert.DeserializeObject<IDomainEvents>(outboxMessage.Content,
+                    = JsonConvert.DeserializeObject<IDomainEvent>(outboxMessage.Content,
                         JsonSerializerSettings);
 
                 await publisher.Publish(domainEvent!, context.CancellationToken);

@@ -2,4 +2,4 @@ using Bookify.Domain.Abstractions;
 
 namespace Bookify.Domain.Bookings.Events;
 
-public record BookingRejectedDomainEvent(Guid Id) : IDomainEvents;
+public sealed record BookingRejectedDomainEvent(Guid Id) : IDomainEvent;
